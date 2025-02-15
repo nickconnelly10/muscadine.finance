@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { BrowserProvider } from "ethers"; // Updated for Ethers v6
+import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Button } from "@/components/ui/button"; // Ensure correct path
+import { Button } from "../components/ui/button";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
@@ -19,9 +19,11 @@ export default function Dashboard() {
     async function connectWallet() {
       if (typeof window.ethereum !== "undefined") {
         try {
-          const provider = new BrowserProvider(window.ethereum); // Ethers v6 fix
-          const accounts = await provider.send("eth_requestAccounts", []);
-          setWallet(accounts[0]);
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          await provider.send("eth_requestAccounts", []);
+          const signer = await provider.getSigner();
+          const address = await signer.getAddress();
+          setWallet(address);
         } catch (error) {
           console.error("Error connecting wallet:", error);
         }
@@ -76,4 +78,13 @@ export default function Dashboard() {
         )}
       </ul>
       <Button className="w-full mt-4" onClick={() => router.push('/lending')}>Go to Lending Dashboard</Button>
-      <h2 className="text
+      <h2 className="text-xl font-semibold mt-4">Borrowing</h2>
+      {borrowingAssets.map((asset) => (
+        <div key={asset} className="flex justify-between items-center mt-2">
+          <span className="text-lg">Borrow {asset}</span>
+          <Button>Borrow</Button>
+        </div>
+      ))}
+    </div>
+  );
+}
