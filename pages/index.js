@@ -1,4 +1,4 @@
-import Dashboard from '../components/Dashboard'; // Relative import
+import Dashboard from "../components/Dashboard";
 
 export default function Home() {
   return <Dashboard />;
