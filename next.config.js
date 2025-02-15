@@ -1,10 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    output: 'export', // Enables static site export
-    images: {
-      unoptimized: true, // Fixes issues with Next.js image optimization
-    },
-  };
-  
-  module.exports = nextConfig;
-  
+const path = require('path');
+
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+    return config;
+  },
+};
