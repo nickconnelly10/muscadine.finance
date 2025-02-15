@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Button } from "../components/ui/button";
+import { Button } from "../components/ui/Button";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function connectWallet() {
-      if (typeof window.ethereum !== "undefined") {
+      if (typeof window !== "undefined" && window.ethereum) {
         try {
           const provider = new ethers.BrowserProvider(window.ethereum);
           await provider.send("eth_requestAccounts", []);
