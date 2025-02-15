@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [chartData, setChartData] = useState([]);
   const [netWorth, setNetWorth] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
   
   const lendingAssets = ["USDC", "cBBTC", "ETH", "rETH", "AERO", "wstETH"];
@@ -24,8 +25,13 @@ export default function Dashboard() {
           const signer = await provider.getSigner();
           const address = await signer.getAddress();
           setWallet(address);
+          setErrorMessage(null);
         } catch (error) {
-          console.error("Error connecting wallet:", error);
+          if (error.code === "ACTION_REJECTED") {
+            setErrorMessage("User rejected the wallet connection request.");
+          } else {
+            console.error("Error connecting wallet:", error);
+          }
         }
       }
     }
@@ -58,6 +64,7 @@ export default function Dashboard() {
     <div className="p-6">
       <h1 className="text-2xl font-bold">Muscadine Finance</h1>
       {wallet ? <p className="text-lg">Connected: {wallet}</p> : <p className="text-lg">No wallet connected</p>}
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <h2 className="text-xl font-semibold mt-4">Net Worth: ${netWorth ? netWorth.toFixed(2) : "0.00"}</h2>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={chartData.length ? chartData : [{ date: "N/A", value: 0 }]}> 
