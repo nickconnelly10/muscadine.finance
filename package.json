@@ -3,16 +3,28 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "dev": "next dev",
-      "build": "next build && next export",
-      "start": "next start"
+        "dev": "next dev",
+        "build": "next build && next export",
+        "start": "next start"
     },
     "dependencies": {
-      "next": "latest",
-      "react": "latest",
-      "react-dom": "latest",
-      "recharts": "^2.3.2",
-      "ethers": "^5.7.2"
-    }
-  }
-  
+        "ethers": "^6.13.5",
+        "next": "^15.1.7",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "recharts": "^2.15.1"
+    },
+    "description": "A DeFi dApp built on the Base network using Next.js.",
+    "main": "next.config.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nickconnelly10/muscadine.finance.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/nickconnelly10/muscadine.finance/issues"
+    },
+    "homepage": "https://github.com/nickconnelly10/muscadine.finance#readme"
+}
