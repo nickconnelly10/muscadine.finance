@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Button } from "../components/ui/Button";
+import { Button } from "./ui/Button";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
