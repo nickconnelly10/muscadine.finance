@@ -1,20 +1,19 @@
-// src/context/wallet.js
-
+// context/wallet.js
 import { createContext, useContext, useState, useEffect } from "react";
-import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
-import { http } from "viem"; // Correct import for providers
-import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import { WagmiConfig, createConfig, configureChains, mainnet } from "wagmi";
+import { http } from "viem";
+import { coinbaseWallet } from "wagmi/connectors";
 
 const { chains, publicClient } = configureChains(
   [mainnet],
-  [http()] // Use `http()` instead of `publicProvider()`
+  [http()]
 );
 
-const wagmiClient = createClient({
+const wagmiClient = createConfig({
   autoConnect: true,
   publicClient,
   connectors: [
-    new CoinbaseWalletConnector({ chains, options: { appName: "Muscadine Finance" } }),
+    coinbaseWallet({ chains, options: { appName: "Muscadine Finance" } }),
   ],
 });
 
@@ -31,7 +30,7 @@ export function WalletProvider({ children }) {
 
   return (
     <WalletContext.Provider value={{ account, wagmiClient }}>
-      <WagmiConfig client={wagmiClient}>{children}</WagmiConfig>
+      <WagmiConfig config={wagmiClient}>{children}</WagmiConfig>
     </WalletContext.Provider>
   );
 }
