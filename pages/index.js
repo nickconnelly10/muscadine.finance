@@ -10,7 +10,6 @@ export default function Home() {
   useEffect(() => {
     async function fetchBalance() {
       if (!account) return;
-      // Fetch balance logic here
       setBalance("0.00 USDC"); // Placeholder
     }
     fetchBalance();

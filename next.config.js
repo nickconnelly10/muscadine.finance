@@ -1,9 +1,13 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true, // Avoids issues with Next.js image optimization on static hosting
+  reactStrictMode: true,
+  experimental: {
+    appDir: false,
+  },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+    return config;
   },
 };
 
