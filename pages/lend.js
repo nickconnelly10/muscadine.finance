@@ -1,36 +1,34 @@
-import { useState } from 'react';
-import { useAccount, useSigner } from 'wagmi';
-import { supplyAsset, borrowUSDC } from '../utils/moonwell';
+// pages/lending.js
+import { useEffect, useState } from "react";
+import { useWallet } from "../context/wallet";
+import { ethers } from "ethers";
+import { Moonwell } from "@moonwell-fi/moonwell-sdk";
 
-export default function Lend() {
-  const { address } = useAccount();
-  const { data: signer } = useSigner();
-  const [amount, setAmount] = useState('');
+export default function Lending() {
+  const { account, provider, signer } = useWallet();
+  const [usdcBalance, setUsdcBalance] = useState("0.00");
 
-  async function handleSupply() {
-    if (!signer) return alert('Connect your wallet first!');
-    const message = await supplyAsset('0x1234...cBBTC_ADDRESS', amount, signer);
-    alert(message);
-  }
-
-  async function handleBorrow() {
-    if (!signer) return alert('Connect your wallet first!');
-    const message = await borrowUSDC(amount, signer);
-    alert(message);
-  }
+  useEffect(() => {
+    async function fetchUSDCBalance() {
+      if (!signer) return;
+      const moonwell = new Moonwell(provider);
+      const usdcContract = await moonwell.getMarket("USDC");
+      const balance = await usdcContract.balanceOf(account);
+      setUsdcBalance(ethers.formatUnits(balance, 6));
+    }
+    fetchUSDCBalance();
+  }, [account, signer]);
 
   return (
-    <div className="flex flex-col items-center space-y-4">
-      <h1 className="text-2xl font-bold">Lend & Borrow</h1>
-      <input
-        type="number"
-        placeholder="Enter amount"
-        className="border p-2 rounded"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <button onClick={handleSupply} className="bg-blue-500 text-white p-2 rounded">Supply Asset</button>
-      <button onClick={handleBorrow} className="bg-green-500 text-white p-2 rounded">Borrow USDC</button>
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold">Lending Dashboard</h1>
+        <p className="mt-2 text-gray-400">Lend & Borrow assets via Moonwell</p>
+        <div className="mt-6 bg-gray-800 p-4 rounded-xl">
+          <p>Connected Wallet: {account || "Not Connected"}</p>
+          <p>USDC Balance: {usdcBalance}</p>
+        </div>
+      </div>
     </div>
   );
 }
