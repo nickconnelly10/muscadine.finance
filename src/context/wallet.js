@@ -1,5 +1,5 @@
+// src/context/wallet.js
 
-/ context/wallet.js
 import { createContext, useContext, useState, useEffect } from "react";
 import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
