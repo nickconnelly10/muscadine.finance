@@ -1,5 +1,11 @@
-import '../styles/globals.css'; // Relative import
+import { WagmiConfig, wagmiClient } from '../context/wallet';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <Component {...pageProps} />
+    </WagmiConfig>
+  );
 }
+
+export default MyApp;
