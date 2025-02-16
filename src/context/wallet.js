@@ -1,14 +1,14 @@
-import { createClient, configureChains, WagmiConfig } from 'wagmi';
+import { createConfig, configureChains, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 import { mainnet, base } from 'wagmi/chains';
-import { injectedConnector } from 'wagmi/connectors/injected';
+import { injected } from 'wagmi/connectors/injected';
 
-const { chains, provider } = configureChains([base], [publicProvider()]);
+const { chains, publicClient } = configureChains([base, mainnet], [publicProvider()]);
 
-const wagmiClient = createClient({
+const wagmiClient = createConfig({
   autoConnect: true,
-  provider,
-  connectors: [injectedConnector()],
+  publicClient,
+  connectors: [injected()],
 });
 
 export { WagmiConfig, wagmiClient, chains };
