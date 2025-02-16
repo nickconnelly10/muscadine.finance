@@ -2,14 +2,17 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { http } from "viem"; // Correct import for providers
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 
-const { chains, provider } = configureChains([mainnet], [publicProvider()]);
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [http()] // Use `http()` instead of `publicProvider()`
+);
 
 const wagmiClient = createClient({
   autoConnect: true,
-  provider,
+  publicClient,
   connectors: [
     new CoinbaseWalletConnector({ chains, options: { appName: "Muscadine Finance" } }),
   ],
