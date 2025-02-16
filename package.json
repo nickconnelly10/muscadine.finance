@@ -3,36 +3,36 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build && next export",
-        "start": "next start"
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start"
     },
     "dependencies": {
-        "@moonwell-fi/moonwell-sdk": "^0.6.1",
-        "ethers": "^6.13.5",
-        "next": "^15.1.7",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0",
-        "recharts": "^2.15.1",
-        "viem": "^2.23.2",
-        "wagmi": "^2.14.11"
+      "@moonwell-fi/moonwell-sdk": "^0.6.1",
+      "ethers": "^6.13.5",
+      "next": "^15.1.7",
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0",
+      "recharts": "^2.15.1",
+      "viem": "^2.23.2",
+      "wagmi": "^2.14.11"
     },
     "description": "A DeFi dApp built on the Base network using Next.js.",
-    "main": "next.config.js",
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/nickconnelly10/muscadine.finance.git"
+      "type": "git",
+      "url": "git+https://github.com/nickconnelly10/muscadine.finance.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/nickconnelly10/muscadine.finance/issues"
+      "url": "https://github.com/nickconnelly10/muscadine.finance/issues"
     },
     "homepage": "https://github.com/nickconnelly10/muscadine.finance#readme",
     "devDependencies": {
-        "autoprefixer": "^10.4.20",
-        "postcss": "^8.5.2",
-        "tailwindcss": "^4.0.6"
+      "autoprefixer": "^10.4.20",
+      "postcss": "^8.5.2",
+      "tailwindcss": "^4.0.6"
     }
-}
+  }
+  
